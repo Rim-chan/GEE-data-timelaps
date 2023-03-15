@@ -82,7 +82,7 @@ def app():
                     'max': 0.3,
                     'gamma': [1, 1, 1],
                 }
-                geemap.download_ee_video(collection, video_args, out_gif)
+                geemap.download_ee_video(collection, video_args, '.gif')
 
             else:
                 collection = geemap.sentinel2_timelapse(roi=st.session_state['roi'], 
@@ -98,15 +98,15 @@ def app():
                                                         mp4=True)
                                                 
             # create a Path object with the path to the file
-            path = Path(out_gif)
-            if path.is_file():
-                st.success("The timelaps is successfully saved!")
-                geemap.gif_to_mp4(out_gif, out_gif.replace('.gif', '.mp4'))
-                video_file = open(out_gif.replace('.gif', '.mp4'), 'rb')
-                video_bytes = video_file.read()
-                st.video(video_bytes)
+            # path = Path(out_gif)
+            # if path.is_file():
+            #     st.success("The timelaps is successfully saved!")
+            #     geemap.gif_to_mp4(out_gif, out_gif.replace('.gif', '.mp4'))
+            #     video_file = open(out_gif.replace('.gif', '.mp4'), 'rb')
+            #     video_bytes = video_file.read()
+            #     st.video(video_bytes)
             
-            else:
-                st.error('An error occurred while downloading. User memory limit exceeded.')
+            # else:
+            #     st.error('An error occurred while downloading. User memory limit exceeded.')
             
 #[[[9.689255,37.102836],[9.689255,37.173996],[9.896622,37.173996],[9.896622,37.102836],[9.689255,37.102836]]]
