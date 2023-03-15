@@ -27,8 +27,8 @@ def app():
 
     st.sidebar.info(
     """
-    Web App URL: <https://rim-chan-flood-app-s3tm0i.streamlit.app/>
-    GitHub repository: <https://github.com/Rim-chan/FLOOD>
+    Web App URL: <https://gee-timelaps.streamlit.app//>
+    GitHub repository: <https://github.com/Rim-chan/GEE-data-timelaps>
     """
     )
 
