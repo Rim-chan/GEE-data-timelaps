@@ -29,7 +29,7 @@ def app():
     Map = geemap.Map() 
     Map.to_streamlit()
 
-    with st.form("timelaps parameters", clear_on_submit=True):
+    with st.form("timelaps parameters", clear_on_submit=False):
         col1, col2, col3 = st.columns(3)
         st.session_state['data_collection']  = col1.selectbox("Select a satellite image collection", 
                                                               ["Landsat TM-ETM-OLI Surface Reflectance", 
