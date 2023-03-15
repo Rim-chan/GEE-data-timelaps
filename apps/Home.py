@@ -2,7 +2,7 @@ import streamlit as st
 
 
 def app():
-    st.title("Flood Detection")
+    # st.title("Flood Detection")
     
     st.sidebar.title("About")
     st.sidebar.info(
@@ -25,8 +25,8 @@ def app():
         """
     )
    
-    st.subheader("Background and Motivation")
-    st.markdown(
-        """
-    """
-    )
+    # st.subheader("Background and Motivation")
+    # st.markdown(
+    #     """
+    # """
+    # )
