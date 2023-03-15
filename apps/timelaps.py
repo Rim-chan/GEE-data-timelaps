@@ -24,22 +24,6 @@ if not os.path.exists(work_dir):
 
 def app():
 
-
-    st.sidebar.info(
-    """
-    Web App URL: <https://gee-timelaps.streamlit.app//>
-    GitHub repository: <https://github.com/Rim-chan/GEE-data-timelaps>
-    """
-    )
-
-    st.sidebar.title("Contact")
-    st.sidebar.info(
-        """
-        [GitHub](https://github.com/Rim-chan) |[LinkedIn](https://www.linkedin.com/in/rim-sleimi/)
-        """
-    )
-    
-
     st.title("Time Laps")
     st.info('Draw a rectangle on the map and customize timelaps parameters, and then click on the submit button.', icon=None)
     Map = geemap.Map() 
