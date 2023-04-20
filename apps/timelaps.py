@@ -33,7 +33,8 @@ def app():
         col1, col2, col3 = st.columns(3)
         st.session_state['data_collection']  = col1.selectbox("Select a satellite image collection", 
                                                               ["Landsat TM-ETM-OLI Surface Reflectance", 
-                                                              "Sentinel-2 MSI Surface Reflectance"
+                                                               "Sentinel-2 MSI Surface Reflectance",
+                                                               "MODIS Terra NDVI",
                                                               ]) 
         
         st.session_state['frequency'] = col2.selectbox("Select the data frequency", 
@@ -85,10 +86,10 @@ def app():
                 }
                 geemap.download_ee_video(collection, video_args, out_gif)
 
-            else:
-                st.write('S2')
+            elif st.session_state['data_collection'] == "Sentinel-2 MSI Surface Reflectance":
+                st.write('Sentinel-2')
                 collection = geemap.sentinel2_timelapse(roi=st.session_state['roi'], 
-                                                        out_gif=out_gif, 
+                                                        out_gif=out_gif,
                                                         start_year=int(st.session_state['start_year']), 
                                                         end_year=int(st.session_state['end_year']), 
                                                         start_date=st.session_state['start_date'], 
@@ -98,7 +99,30 @@ def app():
                                                         frequency=st.session_state['frequency'], 
                                                         title=st.session_state['file_name'],
                                                         mp4=True)
-                                                
+
+            else:
+                st.write(st.session_state['data_collection'])
+                collection = geemap.modis_timeseries(asset_id='MODIS/061/MOD13Q1',  
+                                                     roi=st.session_state['roi'], 
+                                                     start_year=int(st.session_state['start_year']), 
+                                                     end_year=int(st.session_state['end_year']), 
+                                                     start_date=st.session_state['start_date'], 
+                                                     end_date=st.session_state['end_date'])
+                # Define arguments for animation function parameters.
+                video_args = {
+                    'dimensions': 768,
+                    'region': st.session_state['roi'],
+                    'framesPerSecond': 120,
+                    'bands': 'NDVI',
+                    'min': 0,
+                    'max': 8000.0,
+                    'palette':  ['FFFFFF', 'CE7E45', 'DF923D', 'F1B555', 'FCD163', '99B718', '74A901',
+                                 '66A000', '529400', '3E8601', '207401', '056201', '004C00', '023B01',
+                                 '012E01', '011D01', '011301']
+                }
+                geemap.download_ee_video(collection, video_args, out_gif) 
+
+
             # create a Path object with the path to the file
             path = Path(out_gif)
             if path.is_file():
@@ -110,3 +134,5 @@ def app():
             
             else:
                 st.error('An error occurred while downloading. User memory limit exceeded.')
+            
+#[[[9.689255,37.102836],[9.689255,37.173996],[9.896622,37.173996],[9.896622,37.102836],[9.689255,37.102836]]]
